@@ -27,10 +27,12 @@ function isMatchingPost(text = "") {
 }
 
 // === Insert Queue Config ===
-const INSERT_BATCH_SIZE = 100;
-const INSERT_INTERVAL_MS = 5000;
-const MAX_QUEUE_LENGTH = 1000;
-const MAX_RETRIES = 3;
+import {
+  INSERT_BATCH_SIZE,
+  INSERT_INTERVAL_MS,
+  MAX_QUEUE_LENGTH,
+  MAX_RETRIES,
+} from "./config.js";
 
 let insertQueue = [];
 let isInserting = false;
