@@ -1,6 +1,6 @@
 // utils/db.js
 import Database from "better-sqlite3";
-import { DB_PATH } from "../config";
+import { DB_PATH } from "../config.js";
 import path from "path";
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
