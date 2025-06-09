@@ -3,15 +3,29 @@ import { IdResolver } from "@atproto/identity";
 import db from "./utils/db.js";
 import { KEYWORDS } from "./config.js";
 
-// Precompile keyword regexes
-const keywordRegexes = KEYWORDS.map(
-  (kw) =>
-    new RegExp(`\\b${kw.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&")}\\b`, "i")
-);
-
 function isMatchingPost(text = "") {
-  return keywordRegexes.some((regex) => regex.test(text));
+  if (!text || typeof text !== "string") return false;
+
+  // Normalize: lowercase and remove basic punctuation
+  const cleaned = text
+    .toLowerCase()
+    .replace(/[^\w\s#]/g, "") // Keep hashtags
+    .split(/\s+/); // Tokenize by space
+
+  const joinedText = cleaned.join(" ");
+
+  return KEYWORDS.some((kw) => {
+    const normalizedKeyword = kw.toLowerCase();
+    // Match inside hashtags or joined words
+    return (
+      joinedText.includes(normalizedKeyword) ||
+      cleaned.some((word) =>
+        word.includes(normalizedKeyword.replace(/\s+/g, ""))
+      ) // e.g. "mentalhealth"
+    );
+  });
 }
+
 // === Insert Queue Config ===
 const INSERT_BATCH_SIZE = 100;
 const INSERT_INTERVAL_MS = 5000;
