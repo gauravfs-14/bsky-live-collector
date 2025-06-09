@@ -1,0 +1,27 @@
+{
+  "name": "bsky-live-collector",
+  "version": "1.0.0",
+  "description": "A tool to collect live posts from Bluesky (bsky) on specific topics using the bsky Firehose API and store them in a local SQLite database.",
+  "license": "MIT",
+  "keywords": [
+    "bsky",
+    "bluesky",
+    "firehose",
+    "collector",
+    "sqlite",
+    "database",
+    "live posts"
+  ],
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@atproto/sync": "^0.1.24",
+    "better-sqlite3": "^11.10.0",
+    "dotenv": "^16.5.0"
+  }
+}
