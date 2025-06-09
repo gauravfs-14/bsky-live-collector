@@ -1,13 +1,11 @@
 // utils/db.js
 import Database from "better-sqlite3";
-import dotenv from "dotenv";
+import { DB_PATH } from "../config";
 import path from "path";
 
-dotenv.config();
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-const dbPath =
-  process.env.SQLITE_DB_PATH || path.join(process.cwd(), "local.db");
-const db = new Database(dbPath);
+const db = new Database(path.join(__dirname, "..", DB_PATH));
 
 // Optional: Ensure table exists
 db.exec(`
