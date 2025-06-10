@@ -6,6 +6,7 @@ import path from "path";
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const db = new Database(path.join(__dirname, "..", DB_PATH));
+console.log(`Database initialized at ${path.join(__dirname, "..", DB_PATH)}`);
 
 // Optional: Ensure table exists
 db.exec(`
